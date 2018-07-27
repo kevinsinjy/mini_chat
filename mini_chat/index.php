@@ -44,6 +44,14 @@
         $reponse = $bdd->query('SELECT pseudo, message,date FROM "mini_chat" ORDER BY ID DESC LIMIT 0, 10');
 
         // Affichage de chaque message (toutes les données sont protégées par htmlspecialchars)
+    
+        // Vérifions si la requête a fonctionné
+        if(!$reponse) {
+         // terminer le programme avec l'erreur d'affichée
+          // http://php.net/manual/fr/pdo.errorinfo.php
+          die($bdd->errorInfo[2]); 
+        
+        }
 
         while ($donnees = $reponse->fetch()){
             echo '<p><strong>' . htmlspecialchars($donnees['pseudo']) . '</strong> : ' . 
